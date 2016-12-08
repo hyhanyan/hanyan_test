@@ -92,6 +92,7 @@ char *strcpy1(char *strDest,const char *strSrc)
 //一个数组长度为n,并且里面的每个元素的范围不超过n，并且这个数组是有序递增的，请找出这个数组不存在那个小于等于n的那个数字
 // 0，1，2，3，4     n=5,  ------->输出5
 // 0，1，3，4，5     n=5,  -------->输出2
+// 时间复杂度O(logn)
 int find(int arr[],int left,int right);
 int findArray(int arr[],int n)
 {
@@ -125,7 +126,26 @@ int find(int arr[],int left,int right)
         return find(arr,mid,right);
     }
 }
+//上面的方法改进一个函数
+//时间复杂度O(logn)
+int findUpdate(int arr[],int n)
+{
+    if((arr[0]+arr[n-1]) != n){
+        return (arr[0]+arr[n-1]) > n ? 0:n; 
+    }
+    int left = 0,right=n;
+    while((right-left) > 1){
+        int mid = left + (right-left)/2;
+        if(arr[mid] > mid){
+            right = mid;
+        }else{
+            left = mid;
+        }
+    }
+    return arr[left] + 1;
+}
 
+//时间复杂度O(n/2) = O(n) 
 int findarray1(int arr[],int n)
 {
     int left =0,right = n-1;
@@ -159,10 +179,20 @@ int main(){
     char str[] = "This is a student.";
     char str1[] = "ab";
     
-    int arr[] = {0,1,2,4,5};
+    int arr[] = {1,2,3,4,5};
+    int brr[] = {0,2,3,4,5};
+    int crr[] = {0,1,3,4,5};
+    int drr[] = {0,1,2,4,5};
+    int err[] = {0,1,2,3,5};
+    int frr[] = {0,1,2,3,4};
 
     printf("======================\n");
-    printf("%d\n",findarray1(arr,5));
+    printf("%d\n",findUpdate(arr,5));
+    printf("%d\n",findUpdate(brr,5));
+    printf("%d\n",findUpdate(crr,5));
+    printf("%d\n",findUpdate(drr,5));
+    printf("%d\n",findUpdate(err,5));
+    printf("%d\n",findUpdate(frr,5));
     printf("======================\n");
 
     int o =8;
