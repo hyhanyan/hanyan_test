@@ -126,14 +126,43 @@ int find(int arr[],int left,int right)
     }
 }
 
+int findarray1(int arr[],int n)
+{
+    int left =0,right = n-1;
+    if((arr[left]+arr[right]) < n){
+        return n;
+    }else if((arr[left]+arr[right]) > n){
+        return 0;
+    }else{
+        left++;
+        right--;
+        while(left < right){
+            int value = arr[left] + arr[right];
+            if(value < n){
+                return (n-arr[left]);
+            }else if(value > n){
+                return (n-arr[right]);
+            }else{
+                left++;
+                right--;
+            }
+        }
+        if(left == right){
+            return (n-arr[left]);
+        }
+    }
+
+    return -1;
+}
+
 int main(){
     char str[] = "This is a student.";
     char str1[] = "ab";
     
-    int arr[] = {0,1,2,3,5};
+    int arr[] = {0,1,2,4,5};
 
     printf("======================\n");
-    printf("%d\n",findArray(arr,5));
+    printf("%d\n",findarray1(arr,5));
     printf("======================\n");
 
     int o =8;
