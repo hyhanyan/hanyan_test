@@ -133,7 +133,7 @@ int findUpdate(int arr[],int n)
     if((arr[0]+arr[n-1]) != n){
         return (arr[0]+arr[n-1]) > n ? 0:n; 
     }
-    int left = 0,right=n;
+    int left = 0,right=n-1;
     while((right-left) > 1){
         int mid = left + (right-left)/2;
         if(arr[mid] > mid){
@@ -179,20 +179,22 @@ int main(){
     char str[] = "This is a student.";
     char str1[] = "ab";
     
-    int arr[] = {1,2,3,4,5};
-    int brr[] = {0,2,3,4,5};
-    int crr[] = {0,1,3,4,5};
-    int drr[] = {0,1,2,4,5};
-    int err[] = {0,1,2,3,5};
-    int frr[] = {0,1,2,3,4};
+    int arr[] = {1,2,3,4,5,6};
+    int brr[] = {0,2,3,4,5,6};
+    int crr[] = {0,1,3,4,5,6};
+    int drr[] = {0,1,2,4,5,6};
+    int err[] = {0,1,2,3,5,6};
+    int frr[] = {0,1,2,3,4,6};
+    int hrr[] = {0,1,2,3,4,5};
 
     printf("======================\n");
-    printf("%d\n",findUpdate(arr,5));
-    printf("%d\n",findUpdate(brr,5));
-    printf("%d\n",findUpdate(crr,5));
-    printf("%d\n",findUpdate(drr,5));
-    printf("%d\n",findUpdate(err,5));
-    printf("%d\n",findUpdate(frr,5));
+    printf("%d\n",findUpdate(arr,6));
+    printf("%d\n",findUpdate(brr,6));
+    printf("%d\n",findUpdate(crr,6));
+    printf("%d\n",findUpdate(drr,6));
+    printf("%d\n",findUpdate(err,6));
+    printf("%d\n",findUpdate(frr,6));
+    printf("%d\n",findUpdate(hrr,6));
     printf("======================\n");
 
     int o =8;
