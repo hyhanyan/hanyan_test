@@ -36,6 +36,47 @@ void TraverseBiTree(BiTree T)
 
 }
 
+void PrintPreBiTree(BiTreeNode* root)
+{
+    if(root == NULL){
+        return ;
+    }
+    stack<BiTreeNode *> st;
+    BiTreeNode *p = root;
+    while(!st.empty() || p != NULL){
+        while(p != NULL){
+            st.push(p);
+            printf("%c ",p->data);
+            p = p->leftChild;
+        }
+        if(!st.empty()){
+            p = st.top();
+            st.pop();
+            p = p->rightChild;
+        }
+    }
+
+}
+
+void PrintDeepBiTree(BiTreeNode *root)
+{
+    if(NULL == root){
+        return;
+    }
+    stack<BiTreeNode *> st;
+    st.push(root);
+    while(!st.empty()){
+        BiTreeNode * p = st.top();
+        printf("%c ",p->data);
+        st.pop();
+        if(p->rightChild){
+            st.push(p->rightChild);
+        }
+        if(p->leftChild){
+            st.push(p->leftChild);
+        }
+    }
+}
 
 void PrintZSBiTree(BiTreeNode* root)
 {
@@ -77,8 +118,13 @@ int main()
 {
     BiTree T;
     createBiTree(T);
+    TraverseBiTree(T);
+    printf("\n");
     //abf##dG##H##Cg##eM##N##
-    PrintZSBiTree(T);
+    //PrintZSBiTree(T);
+    PrintPreBiTree(T);
+    printf("\n");
+    PrintDeepBiTree(T);
     //TraverseBiTree(T);
     return 0;
 }
