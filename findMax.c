@@ -22,7 +22,7 @@ int findMax(int arr[],int length)
     return arr[right];
 }
 
-// 翻转有序数组后，找出最大的
+// 翻转有序数组后，找出最小的
 // 0，1，2，4，5，6，7 数组向左翻转变成 5，6，7，0，1，2，4
 int findMin(int arr[],int length)
 {
