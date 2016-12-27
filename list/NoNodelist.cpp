@@ -47,7 +47,14 @@ void InsertEnd(int data)
     }
 }
 
-
+void DestoryLink()
+{
+    while(pFirst != NULL){
+        Node *p = pFirst;
+        pFirst = pFirst->next;
+        free(p);
+    }
+}
 void ReverseLink()
 {
     if(pFirst != NULL && pFirst->next != NULL){
@@ -87,6 +94,8 @@ int main()
     InsertEnd(5);
     ShowLink();
     ReverseLink();
+    ShowLink();
+    DestoryLink();
     ShowLink();
     return 0;
 }

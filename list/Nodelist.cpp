@@ -18,14 +18,27 @@ void InitLink()
     pHead->pNext=NULL;
 }
 
+void DestoryLink()
+{ 
+    while(pHead->pNext != NULL){
+        Node *p = pHead->pNext;
+        pHead->pNext = pHead->pNext->pNext;
+        free(p);
+    }
+    free(pHead);
+    pHead = NULL;
+}
+
 void ShowLink()
 {
-    Node *pCur = pHead->pNext;
-    while(pCur != NULL){
-        printf("%d ",pCur->val);
-        pCur = pCur->pNext;
+    if(pHead != NULL){
+        Node *pCur = pHead->pNext;
+        while(pCur != NULL){
+            printf("%d ",pCur->val);
+            pCur = pCur->pNext;
+        }
+        putchar('\n');
     }
-    putchar('\n');
 }
 
 bool InsertLink(int data)
@@ -90,6 +103,8 @@ int main()
 
     ShowLink();
     ReverseLink();
+    ShowLink();
+    DestoryLink();
     ShowLink();
     return 0;
 }
