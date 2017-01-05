@@ -114,17 +114,122 @@ void PrintZSBiTree(BiTreeNode* root)
     }
 }
 
+
+//把二叉搜索树转换成有序的双向链表，，这个是有头结点的
+BiTreeNode* TreeToLink(BiTreeNode* root)
+{
+    if(NULL == root){
+        return NULL;
+    }
+    stack<BiTreeNode *> st;
+    BiTreeNode *p = root;
+    BiTreeNode *pStart = new BiTreeNode;
+    pStart->leftChild = NULL;
+    pStart->rightChild = NULL;
+    BiTreeNode *s = pStart;
+    while(p != NULL || !st.empty()){
+        
+        while(p != NULL){
+            st.push(p);
+            p = p->leftChild;
+        }
+        if(!st.empty()){
+            BiTreeNode *ps = st.top();
+            s->rightChild = ps;
+            ps->leftChild = s;
+            s = s->rightChild;
+            st.pop();
+            p = ps->rightChild;
+        }
+    }
+
+    return pStart;
+}
+/*
+ *注意，当转为没有头结点的有序双向链表时，要用头结点来连接所有的节点，然后在delete掉，如果不用，那么在进入栈之后，树的最左面的孩子的右孩子会被遗弃，要注意
+ *
+*/
+//把二叉搜索树转换成有序的双向链表，，这个是没有头结点的
+BiTreeNode* TreeToNoLink(BiTreeNode* root)
+{
+    if(NULL == root){
+        return NULL;
+    }
+    stack<BiTreeNode *> st;
+    BiTreeNode *p = root;
+    BiTreeNode *pStart = new BiTreeNode;
+    pStart->leftChild = NULL;
+    pStart->rightChild = NULL;
+    BiTreeNode *s = pStart;
+    while(p != NULL || !st.empty()){
+        
+        while(p != NULL){
+            st.push(p);
+            p = p->leftChild;
+        }
+        if(!st.empty()){
+            BiTreeNode *ps = st.top();
+            s->rightChild = ps;
+            ps->leftChild = s;
+            s = s->rightChild;
+            st.pop();
+            p = ps->rightChild;
+        }
+    }
+
+    s = pStart;
+    pStart = pStart->rightChild;
+    delete s;
+    return pStart;
+}
+
 int main()
 {
     BiTree T;
     createBiTree(T);
-    TraverseBiTree(T);
+    //TraverseBiTree(T);
     printf("\n");
     //abf##dG##H##Cg##eM##N##
+    //621##43##5##87##9##
     //PrintZSBiTree(T);
-    PrintPreBiTree(T);
+/*
+    BiTreeNode *pS = TreeToLink(T);
+    pS = pS->rightChild;
+    BiTreeNode *pEnd = pS;
+    while(pEnd->rightChild != NULL){
+        pEnd = pEnd->rightChild;
+    }
+    while(pS != NULL){
+        printf("%c ",pS->data);
+        pS = pS->rightChild;
+    }
+    while(pEnd != NULL){
+        printf("%c ",pEnd->data);
+        pEnd = pEnd->leftChild;
+    }
+
+*/
+    BiTreeNode *pS = TreeToNoLink(T);
+    if(pS == NULL){
+        printf("jjjj\n");
+    }
+    BiTreeNode *pEnd = pS;
+    while(pEnd->rightChild != NULL){
+        pEnd = pEnd->rightChild;
+    }
+    while(pS != NULL){
+        printf("%c ",pS->data);
+        pS = pS->rightChild;
+    }
+   while(pEnd != NULL){
+        printf("%c ",pEnd->data);
+        pEnd = pEnd->leftChild;
+    }
+
     printf("\n");
-    PrintDeepBiTree(T);
+    //PrintPreBiTree(T);
+    //printf("\n");
+    //PrintDeepBiTree(T);
     //TraverseBiTree(T);
     return 0;
 }

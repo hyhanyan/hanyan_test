@@ -28,7 +28,7 @@ void findArray(int arr[],int n,int m)
         }
         if((j == m-1) && (i< n) && (arr[i] == 0)){
             arr[i] = 1;
-            printf("%d\n",i);
+
             j = 0;
             i++;
             count++;
@@ -50,8 +50,8 @@ int main()
 
     int arr[] = {0,0,0,0,0,0};
     findArray(arr,6,10);
-//    printf("%d\n",fun2());
-//    printf("%d\n",fun1());
-//    printf("%d\n",fun2());
+    printf("%d\n",fun2());
+    printf("%d\n",fun1());
+    printf("%d\n",fun2());
     return 0;
 }
